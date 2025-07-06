@@ -1,6 +1,7 @@
 # 🚀 Ansible Deploy with Terraform and AWS CLI
 
 This repository contains Terraform code to deploy and set up **Ansible** on a host (controller) server and **three child servers** using **Terraform** and **AWS CLI**.
+Easily set up your own Ansible lab automatically 😉
 
 ---
 
