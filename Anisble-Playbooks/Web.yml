@@ -1,0 +1,24 @@
+---
+- name: Webserver Setup
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Install HTTPD
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Start and enable HTTPD
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RHEL"
+
+    - name: Copy Index file
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        backup: yes
+      when: ansible_distribution == "RHEL"

@@ -1,0 +1,45 @@
+---
+- name: Database Server Setup
+  hosts: dbserver
+  become: yes
+  tasks:
+    - name: Install MariaDB server
+      ansible.builtin.yum:
+        name: mariadb-server
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Start and enable MariaDB service
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RHEL"
+
+    - name: Install Python Dependency
+      ansible.builtin.yum:
+        name: python3-PyMySQL.noarch
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Create a new database with name 'accounts'
+      mysql_db:
+        name: accounts
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+      when: ansible_distribution == "RHEL"
+
+    - name: Create database with Username = Yudi
+      mysql_user:
+        name: Yudi
+        password: 'Admin9977'
+        priv: '*.*:ALL,GRANT'
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+      register: dbout
+      when: ansible_distribution == "RHEL"
+
+    - name: Output Database Log
+      debug:
+        var: dbout
+      when: ansible_distribution == "RHEL"

@@ -1,0 +1,34 @@
+---
+- name: Webserver Setup
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Install HTTPD
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Start and enable HTTPD
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RHEL"
+
+- name: Database Server Setup
+  hosts: dbserver
+  become: yes
+  tasks:
+    - name: Install MariaDB server
+      ansible.builtin.yum:
+        name: mariadb-server
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Start and enable MariaDB service
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RHEL"

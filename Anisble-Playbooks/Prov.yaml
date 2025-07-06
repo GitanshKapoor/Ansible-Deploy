@@ -1,0 +1,75 @@
+---
+- name: prov servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install NTP Agent on RHEL
+      yum:
+        name: chrony
+        state: present
+      when: ansible_distribution == "RHEL"
+
+    - name: Install NTP on Ubuntu
+      apt:
+        name: ntp
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Start Chronyd Service
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "RHEL"
+
+    - name: Start NTP Service
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Copy Inline Content
+      copy:
+        content: "This Server is Managed by Gitansh"
+        dest: /etc/motd
+    
+    - name: Create a Folder
+      file:
+        path: 'opt/rimac21'
+        state: "directory"
+        mode: '0777'
+
+    - name: Deploy NTP Agent on RHEL
+      template:
+        src: RHEL_conf.j2
+        dest: /etc/chrony.conf
+        backup: yes
+      when: ansible_distribution == "RHEL"
+      notify:
+        - Restart Chronyd Service
+
+    - name: Deploy NTP Agent on Ubuntu
+      template:
+        src: Ubuntu_conf.j2
+        dest: /etc/ntpsec/ntp.conf
+        backup: yes
+      when: ansible_distribution == "Ubuntu"
+      notify:
+        - Restart NTP Service
+  
+  handlers:
+    - name: Restart Chronyd Service
+      service:
+        name: chronyd
+        state: restarted
+        enabled: yes
+      when: ansible_distribution == "RHEL"
+
+    - name: Restart NTP Service
+      service:
+        name: ntp
+        state: restarted
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"

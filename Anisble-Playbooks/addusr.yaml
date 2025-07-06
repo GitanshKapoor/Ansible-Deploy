@@ -1,0 +1,11 @@
+---
+- name: Adding using to Ubuntu Servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: adding user
+      user:
+        name: "{{item}}"
+        state: present
+      loop: "{{usrs}}"
+      when: ansible_distribution == "Ubuntu"
