@@ -40,7 +40,7 @@ aws s3api put-object --bucket your-unique-bucket-name --key backend/
 
 Now, edit the backend configuration:
 
-📄 File: ansible/ansible-deploy/backend.tf
+📄 File: /ansible deploy/backend.tf
 
 Replace the placeholder values with your actual bucket name and AWS region:
 
