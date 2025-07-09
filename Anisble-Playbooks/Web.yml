@@ -18,7 +18,7 @@
 
     - name: Copy Index file
       copy:
-        src: files/index.html
+        src: index.html
         dest: /var/www/html/index.html
         backup: yes
       when: ansible_distribution == "RHEL"
