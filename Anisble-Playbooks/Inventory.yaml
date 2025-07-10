@@ -1,14 +1,14 @@
 all:
   hosts:
     web01:
-      ansible_host: <Add-IP>
+      ansible_host: <Add-Instance-Public-IP>
     web02:
-      ansible_host: <Add-IP>
+      ansible_host: <Add-Instance-Public-IP>
     web03:
-      ansible_host: <Add-IP>
+      ansible_host: <Add-Instance-Public-IP>
       ansible_user: ubuntu
     db01:
-      ansible_host: <Add-IP>
+      ansible_host: <Add-Instance-Public-IP>
 
   children:
     webserver:
