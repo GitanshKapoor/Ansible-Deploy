@@ -68,7 +68,8 @@ ssh-keygen -t rsa -f controller-key
 ssh-keygen -t rsa -f server-key
 ```
 Update the Public Key in the **KeyPair.tf**
-🚨⚠️ Note: Keep the .pem (private) files secure. Please do not share or commit them.
+
+⚠️ Note: Keep the .pem (private) files secure. Please do not share or commit them.
 <hr>
 
 ### 🔹 Step 3: Configure AWS CLI
