@@ -116,7 +116,7 @@ Set up VPC, subnets, security groups, and key pairs
 Install Ansible on the controller
 
 ---
-##  Project Structure
+## 📁 Project Structure
 
 ```sh
 Ansible-Deploy.git/
@@ -168,14 +168,14 @@ After a successful deployment:
 
 
 ---
-### 🧹 Cleanup
+## 🧹 Cleanup
 To destroy all the resources created by Terraform:
 
 ``` bash
 terraform destroy
 ```
 ---
-### 🛡️ Security Notes
+## 🛡️ Security Notes
 - Never commit your .pem private key files.
 - Use .gitignore to exclude them from version control.
 - Rotate keys regularly in production environments.
