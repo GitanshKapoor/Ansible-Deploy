@@ -59,9 +59,9 @@ terraform {
 ### 🔹 Step 2: Create SSH Key Pairs
 Generate two separate SSH key pairs:
 
-controller-key: for accessing the controller server
+- controller-key: for accessing the controller server
 
-server-key: for accessing the child servers
+- server-key: for accessing the child servers
 
 ``` bash
 ssh-keygen -t rsa -f controller-key
@@ -107,15 +107,27 @@ terraform apply
 
 Terraform will now:
 
-Provision one EC2 controller instance
+- Provision one EC2 controller instance
 
-Provision three child EC2 instances
+- Provision three child EC2 instances
 
-Set up VPC, subnets, security groups, and key pairs
+- Set up VPC, subnets, security groups, and key pairs
 
-Install Ansible on the controller
+- Install Ansible on the controller
 
 ---
+## 📌 Output
+After a successful deployment:
+
+✅ One EC2 instance is running as the Ansible Controller
+
+✅ Three EC2 instances are running as Child Nodes
+
+✅ Ansible is installed and configured on the controller to manage the children via SSH
+
+
+---
+
 ## 📁 Project Structure
 
 ```sh
@@ -157,17 +169,7 @@ Ansible-Deploy.git/
 ```
 
 ---
-### 📌 Output
-After a successful deployment:
 
-✅ One EC2 instance is running as the Ansible Controller
-
-✅ Three EC2 instances are running as Child Nodes
-
-✅ Ansible is installed and configured on the controller to manage the children via SSH
-
-
----
 ## 🧹 Cleanup
 To destroy all the resources created by Terraform:
 
